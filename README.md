@@ -14,8 +14,14 @@ sudo yum update -y
 sudo yum groupinstall -y "Development Tools" "Development Libraries" "Additional Development"
 sudo yum install -y kernel-devel kernel-headers zfs
 
-# module upload
+# to check module is loaded well
+sudo lsmod |grep zfs
+# module upload, if above command doesn't show anything.
 sudo /sbin/modprobe zfs
+
+# one more check whether zfs is added to kernel service
+sudo lsmod |grep zfs
+
 # if there is the ZFS module load errors occur in this time, check kernel-headers and zfs/spl version are matched
 # for kernel-headers, command "uname -r", plus, even though you updated this, and installed the software in usr/etc/
 # the system should be reloaded by anyway such as reboot to reach new version kernel.
