@@ -1,30 +1,9 @@
 # ZFS_Setting
 
-# Centos 7 base repository doesn't include zfs repo.
-# add repositories related to ZFS/ZPOOL/Kernel headers
+Centos 7 base repository doesn't include zfs repo.
+01. 20. 2017. 
+Edited Zaizhen Lim
 
-sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
-sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-sudo rpm -Uvh https://forensics.cert.org/cert-forensics-tools-release-el7.rpm
-sudo rpm -Uvh http://download.zfsonlinux.org/epel/zfs-release.el7_3.noarch.rpm
+1. ZFSInstall.sh : to install zfs software pakage and check the module loaded. If there is any error in loading zfs, check comment inside of sh file.
 
-# after setting repo, update the yum program and install required programs
-
-sudo yum update -y
-sudo yum groupinstall -y "Development Tools" "Development Libraries" "Additional Development"
-sudo yum install -y kernel-devel kernel-headers zfs
-
-# to check module is loaded well
-sudo lsmod |grep zfs
-# module upload, if above command doesn't show anything.
-sudo /sbin/modprobe zfs
-
-# one more check whether zfs is added to kernel service
-sudo lsmod |grep zfs
-
-# if there is the ZFS module load errors occur in this time, check kernel-headers and zfs/spl version are matched
-# for kernel-headers, command "uname -r", plus, even though you updated this, and installed the software in usr/etc/
-# the system should be reloaded by anyway such as reboot to reach new version kernel.
-# for zfs/spl version, command "dkms status"
-
-# you can just copy this readme.md file to xxx.sh file in linux (centos system) and command "sh xxx.sh" to run it in one time.
+2. ZFSSetup.sh : to setup zpool by commonly used option, raidz(similar version of raid-5) with 3 seperated part of whole disk(disk setup should be changed based on your number of disk.)
